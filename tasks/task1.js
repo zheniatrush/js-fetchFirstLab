@@ -4,8 +4,22 @@
 
 "https://jsonplaceholder.typicode.com/users - адреса куди робити запит"
 
-function fetchUsers() {
-  // Ваш код
+async function fetchUsers() {
+   try {
+      const response = await fetch(
+         "https://jsonplaceholder.typicode.com/users"
+      );
+      const users = await response.json();
+      const result = users.map((user) => ({
+         ...user,
+         id: user.id,
+         name: user.name,
+      }));
+      return result;
+   } catch (error) {
+      console.log(error);
+      return [];
+   }
 }
 
 console.log(fetchUsers())
